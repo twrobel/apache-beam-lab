@@ -1,0 +1,17 @@
+Excercise # 3
+
+| beam.WindowInto(beam.window.FixedWindows(60))
+| beam.Map(lambda element: element.food)
+| beam.combiners.Count.PerElement()
+
+Excercise #4
+
+| beam.WindowInto(beam.window.SlidingWindows(60, 30))
+| beam.Map(lambda element: element.food)
+| beam.combiners.Count.PerElement()
+
+Excercise #5
+
+| beam.WindowInto(beam.window.Sessions(5*60))
+| beam.Map(lambda element: element.food)
+| beam.combiners.Count.PerElement()
