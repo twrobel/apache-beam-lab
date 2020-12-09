@@ -1,4 +1,12 @@
-Excercise # 3
+Exercise #1
+return [sum(map(element.lower().count, "aeiou"))]
+
+Exercise #2
+| 'Create food sightings' >> beam.Create(inputs)
+| 'Add timestamps' >> beam.ParDo(AddTimestampFn())
+| 'Get timestamps' >> beam.ParDo(GetTimestampFn())
+
+Excercise #3
 
 | beam.WindowInto(beam.window.FixedWindows(60))
 | beam.Map(lambda element: element.food)
@@ -13,5 +21,10 @@ Excercise #4
 Excercise #5
 
 | beam.WindowInto(beam.window.Sessions(5*60))
+| beam.Map(lambda element: element.food)
+| beam.combiners.Count.PerElement()
+
+Excercise #6
+| beam.WindowInto(beam.window.GlobalWindows())
 | beam.Map(lambda element: element.food)
 | beam.combiners.Count.PerElement()
