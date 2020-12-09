@@ -26,5 +26,7 @@ Excercise #5
 
 Excercise #6
 | beam.WindowInto(beam.window.GlobalWindows())
+# | beam.WindowInto(beam.window.GlobalWindows(), trigger=Repeatedly(AfterCount(3)), accumulation_mode=AccumulationMode.ACCUMULATING)
 | beam.Map(lambda element: element.food)
 | beam.combiners.Count.PerElement()
+trigger=Repeatedly(AfterCount(10)), accumulation_mode=AccumulationMode.DISCARDING
