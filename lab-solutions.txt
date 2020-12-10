@@ -1,0 +1,33 @@
+Exercise #1
+| 'Create initial values' >> beam.Create(words_list)
+
+Exercise #2
+| 'Uppercase' >> beam.Map(lambda x: x.upper())
+or
+| 'Uppercase' >> beam.Map(upper)
+
+Excercise #3
+
+ | 'Duplicate words with capital' >> beam.FlatMap(lambda x: [x, x] if starts_with_uppercase(x) else [x])
+
+Excercise #4
+
+| 'Keep only not starting with vowel' >> beam.Filter(lambda x: not starts_with_vowel(x))
+
+Excercise #5
+
+| 'Count vowels in each word' >> beam.Map(number_of_vowels)
+| 'Sum all values together' >> beam.CombineGlobally(sum)
+
+Excercise #6
+| 'Create tuples with first letter as key' >> beam.Map(lambda w: (w[0].lower(), w))
+| 'Group words by first letter' >> beam.GroupByKey()
+
+Excercise #7
+| 'Create tuples with first letter as key' >> beam.Map(lambda w: (w[0].lower(), w))
+| 'Pick longest word for each group' >> beam.CombinePerKey(select_longest)
+
+Excercise #8
+| 'Find words' >> beam.FlatMap(split_line_to_words)
+| 'Pair words with 1' >> beam.Map(lambda word: (word, 1))
+| 'Group and sum' >> beam.CombinePerKey(sum)
